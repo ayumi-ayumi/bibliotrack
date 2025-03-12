@@ -12,24 +12,40 @@
   .btn-toggle {
     @apply z-10 no-underline w-[125px] h-full border-none bg-transparent text-black rounded-3xl cursor-pointer
   }
+
   .label {
     @apply text-base font-medium text-gray-700
   }
+
   .home-panel {
-  @apply h-72 rounded-md bg-neutral-50 shadow
-  }
-  .home-panel-bottom {
-  @apply p-1 row-start-2 flex flex-col justify-between
-  }
-  .home-panel-bottom-link {
-  @apply self-end text-teal-700 hover:text-teal-900 transition duration-200
+    @apply h-72 rounded-md bg-neutral-50 shadow
   }
 
+  .home-panel-bottom {
+    @apply p-1 flex flex-col justify-between
+  }
+
+  .home-panel-bottom-link {
+    @apply self-end text-teal-700 hover:text-teal-900 transition duration-200
+  }
+
+  .btn {
+    @apply py-2 px-4 rounded-lg transition duration-200
+  }
+
+  .btn-cancel {
+    @apply bg-gray-300 hover:bg-gray-500
+  }
+  
   .underline-animation {
+    @apply underline-animation-base 
+  }
+
+  .underline-animation-base {
     display: inline-block;
     position: relative;
   }
-  
+
   .underline-animation::before {
     content: '';
     position: absolute;
@@ -44,32 +60,37 @@
     transition-delay: 0.1s;
     transition-property: width
   }
+
   .underline-animation:active::before {
     z-index: 2;
   }
-  
+
   .underline-animation:hover::before {
     width: 100%;
     left: 0;
   }
+
   .underline-animation::after {
     content: '';
     position: absolute;
     top: calc(100% + 5px);
     width: 0;
-    right:0;
+    right: 0;
     height: 3px;
-    background-color: #fbbf24;;
+    background-color: #fbbf24;
+    ;
     transition-behavior: normal;
     transition-duration: 0.2s;
     transition-timing-function: cubic-bezier(0.29, 0.18, 0.26, 0.83);
     transition-delay: 0s;
     transition-property: width
   }
+
   .underline-animation:hover::after {
     width: 100%;
-    left:0;
+    left: 0;
   }
+
   .underline-animation:focus::after {
     background: #faae2b;
     width: 100%;

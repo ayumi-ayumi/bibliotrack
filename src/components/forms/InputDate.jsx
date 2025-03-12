@@ -7,12 +7,11 @@ export default function InputDate({ register, errors }) {
       <input
         type="date"
         id="date"
-        placeholder="complete date"
-        {...register("date")}
-        className={`ml-3 p-2 border rounded-md text-base border-gray-300 focus:outline-none focus:border-blue-500`}
+        className={`ml-3 rounded-md border border-gray-300 p-2 text-base focus:border-blue-500 focus:outline-none`}
+        {...register('date')}
       />
       {errors.message && (
-        <div className="text-red-500 text-sm mt-1">{errors.message}</div>
+        <div className="mt-1 text-sm text-red-500">{errors.message}</div>
       )}
     </div>
   );

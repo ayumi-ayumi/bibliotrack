@@ -1,14 +1,14 @@
-import { useState, useRef } from "react";
-import bookApi from "../api/book";
+import { useState, useRef } from 'react';
+import bookApi from '../api/book';
 
 export default function SearchBar({ onResultChange }) {
   const inputRef = useRef(null);
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState('');
   const [results, setResults] = useState([]);
   const [showResults, setShowResults] = useState(false);
 
   const handleKeyDown = (event) => {
-    if (event.key === "Enter") handleSubmit();
+    if (event.key === 'Enter') handleSubmit();
   };
 
   const handleFocus = () => {
@@ -37,8 +37,8 @@ export default function SearchBar({ onResultChange }) {
       const response = await bookApi.searchBook({ input: input });
       setResults(response);
       setShowResults(true);
-    } catch (err) {
-      console.error("Error searching for book:", err);
+    } catch (error) {
+      console.error('Error searching for book:', error);
     }
   };
 
@@ -50,9 +50,9 @@ export default function SearchBar({ onResultChange }) {
 
     return (
       <button
-        onClick={handleSelectResult}
-        className="p-2 hover:bg-gray-200"
         key={result.isbn + result.title}
+        className="p-2 hover:bg-gray-200"
+        onClick={handleSelectResult}
       >
         <strong>{result.title}</strong> by {result.author}
       </button>
@@ -61,10 +61,10 @@ export default function SearchBar({ onResultChange }) {
 
   return (
     <div className="relative mb-4">
-      <div className="flex h-13">
+      <div className="h-13 flex">
         <input
           type="text"
-          className="form-control w-full border border-gray-300 rounded-md p-2 bg-slate-100 hover:bg-white focus:ring-2 focus:outline-none focus:ring-teal-800"
+          className="form-control w-full rounded-md border border-gray-300 bg-slate-100 p-2 hover:bg-white focus:outline-none focus:ring-2 focus:ring-teal-800"
           placeholder="Search for a title..."
           ref={inputRef}
           value={input}
@@ -75,14 +75,14 @@ export default function SearchBar({ onResultChange }) {
         />
         <button
           onClick={handleSubmit}
-          className="w-14 border solid border-lime-700 rounded-md bg-transparent py-0 px-2 hover:bg-slate-100"
+          className="solid w-14 rounded-md border border-lime-700 bg-transparent px-2 py-0 hover:bg-slate-100"
         >
           <i className="fa-solid fa-magnifying-glass"></i>
         </button>
       </div>
-      <div className="m-0 absolute w-full shadow-sm z-30 rounded-md bg-white">
+      <div className="absolute z-30 m-0 w-full rounded-md bg-white shadow-sm">
         {results?.length > 0 && showResults && (
-          <ul className="border border-gray-300 rounded-md">
+          <ul className="rounded-md border border-gray-300">
             {results.map(singleResult)}
           </ul>
         )}
@@ -90,4 +90,3 @@ export default function SearchBar({ onResultChange }) {
     </div>
   );
 }
-

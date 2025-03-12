@@ -1,43 +1,44 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import bookApi from "../api/book";
-import { useDispatchBooks } from "../contexts/useContext";
-import SearchBar from "../components/SearchBar";
-import InputBookInfo from "../components/forms/InputBookInfo";
-import Toggle from "../components/forms/Toggle";
-import InputDate from "../components/forms/InputDate";
-import InputComment from "../components/forms/InputComment";
-import InputRating from "../components/forms/InputRating";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { useDispatchBooks } from '../contexts/BookContext';
+import bookApi from '../api/book';
+import SearchBar from '../components/SearchBar';
+import InputBookInfo from '../components/forms/InputBookInfo';
+import Toggle from '../components/forms/Toggle';
+import InputDate from '../components/forms/InputDate';
+import InputComment from '../components/forms/InputComment';
+import InputRating from '../components/forms/InputRating';
 
 export default function AddBook() {
   const dispatch = useDispatchBooks();
   const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     setValue,
   } = useForm({
-    mode: "onBlur",
+    mode: 'onBlur',
     defaultValues: {
-      title: "",
-      author: "",
-      date: "",
-      comment: "",
+      title: '',
+      author: '',
+      date: '',
+      comment: '',
     },
   });
 
   const [newBook, setNewBook] = useState({});
   const [rating, setRating] = useState(0);
-  const [status, setStatus] = useState("Have Read");
-  const [error, setError] = useState("");
+  const [status, setStatus] = useState('Have Read');
+  const [error, setError] = useState('');
 
   const handleChangeRating = (rating) => setRating(rating);
 
   const handleBookSearch = (value) => {
-    setValue("title", value.title);
-    setValue("author", value.author);
+    setValue('title', value.title);
+    setValue('author', value.author);
     setNewBook((prevValue) => {
       return {
         ...prevValue,
@@ -52,28 +53,28 @@ export default function AddBook() {
   const onSubmit = async (formInputs) => {
     const bookData = {
       ...formInputs,
-      rating,
       status,
+      rating,
       isbn: newBook.isbn,
       thumbnail: newBook.thumbnail,
     };
 
     try {
       await bookApi.post(bookData);
-      dispatch({ type: "book/add", book: bookData });
-      if (status === "Have Read") {
-        navigate("/bookshelf");
+      dispatch({ type: 'ADD_BOOK', book: bookData });
+      if (status === 'Have Read') {
+        navigate('/bookshelf');
       } else {
-        navigate("/toread");
+        navigate('/toread');
       }
     } catch (e) {
-      console.error("Error occurred!", e);
-      setError("Failed to add the book. Please try again.");
+      console.error('Error occurred!', e);
+      setError('Failed to add the book. Please try again.');
     }
   };
 
   return (
-    <div className="w-full max-w-lg mx-auto p-5 bg-white shadow-md rounded-lg">
+    <div className="mx-auto w-full max-w-lg rounded-lg bg-white p-5 shadow-md">
       <div>
         <p>Search a Book</p>
         <SearchBar onResultChange={handleBookSearch} />
@@ -101,14 +102,18 @@ export default function AddBook() {
           leftText="Have Read"
           rightText="To-Read"
         />
-        <InputDate register={register} errors={errors} />
-        <InputComment register={register} errors={errors} />
-        <InputRating rating={rating} onChange={handleChangeRating} />
+        {status === 'Have Read' && (
+          <>
+            <InputDate register={register} errors={errors} />
+            <InputComment register={register} errors={errors} />
+            <InputRating rating={rating} onChange={handleChangeRating} />
+          </>
+        )}
         {error && <div className="text-center text-red-500">{error}</div>}
         <input
           type="submit"
           value="Add Book"
-          className="px-4 py-2 bg-teal-600 text-white rounded hover:bg-teal-800 transition-colors"
+          className="rounded bg-teal-600 px-4 py-2 text-white transition-colors hover:bg-teal-800"
         />
       </form>
     </div>
