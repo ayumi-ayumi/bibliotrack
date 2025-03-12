@@ -7,7 +7,7 @@ export default function InputDate({ register, errors }) {
       <input
         type="date"
         id="date"
-        className={`ml-3 rounded-md border border-gray-300 p-2 text-base focus:border-blue-500 focus:outline-none`}
+        className="ml-3 cursor-pointer rounded-md border border-gray-300 p-2 text-base focus:border-blue-500 focus:outline-none"
         {...register('date')}
       />
       {errors.message && (

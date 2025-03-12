@@ -96,16 +96,21 @@ export default function Header() {
             <li
               key={item.url + item.title}
               onClick={handleGoogleSignOut}
-              className="cursor-pointer rounded-xl border-b border-gray-600 p-4 duration-300 hover:bg-teal-200 hover:text-black"
+              className="cursor-pointer rounded-xl border-b border-gray-600 duration-300 hover:bg-teal-200 hover:text-black"
             >
-              {item.title}
+              <Link to={item.url} className="block p-4">
+                {item.title}
+              </Link>
             </li>
           ) : (
             <li
               key={item.url + item.title}
-              className="cursor-pointer rounded-xl border-b border-gray-600 p-4 duration-300 hover:bg-teal-200 hover:text-black"
+              className="cursor-pointer rounded-xl border-b border-gray-600 duration-300 hover:bg-teal-200 hover:text-black"
+              onClick={handleNav}
             >
-              {item.title}
+              <Link to={item.url} className="block p-4">
+                {item.title}
+              </Link>
             </li>
           ),
         )}

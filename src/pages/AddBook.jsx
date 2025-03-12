@@ -113,7 +113,7 @@ export default function AddBook() {
         <input
           type="submit"
           value="Add Book"
-          className="rounded bg-teal-600 px-4 py-2 text-white transition-colors hover:bg-teal-800"
+          className="cursor-pointer rounded bg-teal-600 px-4 py-2 text-white transition-colors hover:bg-teal-800"
         />
       </form>
     </div>
