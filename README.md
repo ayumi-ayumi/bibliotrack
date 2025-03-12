@@ -1,6 +1,6 @@
 # BiblioTrack 📚
 ## Book tracking app 
-👉 [Click here to see the demo](https://realtime-chat-frontend-quvh.onrender.com/)
+👉 [Click here to see the demo](https://bibliotrack-frontend.onrender.com)
 
 ### Home page
 ![Home page](https://github.com/user-attachments/assets/622fa3a9-3923-4d00-b909-48a823a5f515)
@@ -15,18 +15,18 @@
 ![mobile](https://github.com/user-attachments/assets/80d2aadd-144a-4932-96db-f5a8e6ac6326)
 
 ## About
-This app is a record of books you have read and want to read for next.
+BiblioTrack is a comprehensive book tracking application designed to help users keep a record of the books they have read and plan to read. 
 
 ## Features
-- **User Authentication**: Users can sign in with their Google account, providing a secure and convenient way to access the app.
+- **User Authentication🔐**: Users can sign in with their Google account, providing a secure and convenient way to access the app.
 
-- **Chart**: The home page features a chart that displays the number of books the user has read over the last six months, giving a visual representation of their reading habits.
+- **Chart📊**: The home page features a chart that displays the number of books the user has read over the last six months, giving a visual representation of their reading habits.
 
-- **Google Books APIs**: The search bar allows users to search for books using the Google Books APIs, fetching data such as the title, author, ISBN, and book's thumbnail.
+- **Google Books APIs📗**: The search bar allows users to search for books using the Google Books APIs, fetching data such as the title, author, ISBN, and book's thumbnail.
 
-- **useReducer & MongoDB**: It can efficiently manage complex state transitions and handle large amounts of data, ensuring a smooth and scalable user experience.
+- **useReducer & MongoDB📀**: It can efficiently manage complex state transitions and handle large amounts of data, ensuring a smooth and scalable user experience.
   
-- **To-Read Pile**: Users can store books they plan to read next. Once they have read a book, it can be moved to the bookshelf page with some reading information.
+- **To-Read Pile📚**: Users can store books they plan to read next. Once they have read a book, it can be moved to the bookshelf page with some reading information.
 
 
 

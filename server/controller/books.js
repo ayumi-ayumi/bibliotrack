@@ -2,17 +2,24 @@ import Book from '../models/book.js';
 import env from 'dotenv';
 env.config();
 import axios from 'axios';
-import https from 'https';
 
 async function getAllBooks(req, res) {
-  const books = await Book.find().sort({ createdAt: -1 });
-  res.json(books);
+  try {
+    const books = await Book.find().sort({ createdAt: -1 });
+    res.json(books);
+  } catch (error) {
+    res.status(500).json({ msg: 'Error fetching books', error });
+  }
 }
 
 async function saveNewBook(req, res) {
-  const book = new Book(req.body);
-  const newBook = await book.save();
-  res.status(201).json(newBook);
+  try {
+    const book = new Book(req.body);
+    const newBook = await book.save();
+    res.status(201).json(newBook);
+  } catch (error) {
+    res.status(500).json({ msg: 'Error saving book', error });
+  }
 }
 
 async function deleteBook(req, res) {
@@ -25,32 +32,29 @@ async function deleteBook(req, res) {
 
     res.json({ msg: 'Deleted' });
   } catch (error) {
-    res.status(500).json({ msg: 'ERROR occured', error });
+    res.status(500).json({ msg: 'Error deleting book', error });
   }
 }
 
 async function updateBook(req, res) {
-  // const errors = validationResult(req);
+  try {
+    const { date, comment, rating, status } = req.body;
+    const _id = req.params.id;
+    const book = await Book.findById({ _id });
 
-  // if (!errors.isEmpty()) {
-  //   const errs = errors.array();
-  //   return res.status(400).json(errs);
-  // }
+    if (book === null) return res.status(404).json({ msg: 'Page Not Found' });
 
-  const { date, comment, rating, status } = req.body;
-  const _id = req.params.id;
-  const book = await Book.findById({ _id });
+    if (date !== undefined) book.date = date;
+    if (comment !== undefined) book.comment = comment;
+    if (rating !== undefined) book.rating = rating;
+    if (status !== undefined) book.status = status;
 
-  if (book === null) return res.status(404).json({ msg: 'Page Not Found' });
+    await book.save();
 
-  if (date !== undefined) book.date = date;
-  if (comment !== undefined) book.comment = comment;
-  if (rating !== undefined) book.rating = rating;
-  if (status !== undefined) book.status = status;
-
-  await book.save();
-
-  res.json(book);
+    res.json(book);
+  } catch (error) {
+    res.status(500).json({ msg: 'Error updating book', error });
+  }
 }
 
 async function searchBook(req, res) {
