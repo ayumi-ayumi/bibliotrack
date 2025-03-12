@@ -56,17 +56,13 @@ async function updateBook(req, res) {
 async function searchBook(req, res) {
   const input = req.body.input;
 
-  const agent = new https.Agent({
-    rejectUnauthorized: false,
-  });
-
   if (input === '') {
     res.sendStatus(200);
   } else {
     const searchURL = `https://www.googleapis.com/books/v1/volumes?q=${input}&key=${process.env.VITE_API_KEY}&maxResults=8`;
 
     try {
-      const response = await axios.get(searchURL, { httpsAgent: agent });
+      const response = await axios.get(searchURL);
       const results = response.data.items;
 
       const filteredResults = results.map((result) => {
@@ -92,7 +88,7 @@ async function searchBook(req, res) {
       });
       res.json(filteredResults);
     } catch (error) {
-      console.error('Error searching: ', error.message);
+      console.error('Error searching: ', error.message, error.code);
       res.status(500).send('Error searching for book');
     }
   }
