@@ -6,7 +6,7 @@ import apiRoutes from './api-routes/index.js';
 import './helpers/db.js';
 
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 const FRONTEND_URL = process.env.FRONTEND_URL;
 
 app.use(
